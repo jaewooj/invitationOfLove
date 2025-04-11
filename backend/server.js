@@ -11,7 +11,10 @@ const port = process.env.PORT || 5000;
 
 
 // CORS 허용 도메인 명확히 지정
-const allowedOrigins = ['https://shoosetosister.netlify.app'];
+const allowedOrigins = [
+    'https://shoosetosister.netlify.app',
+    'https://shoosetosister.netlify.app/' // ← 이것도 허용
+  ];
 
 app.use(cors({
   origin: function (origin, callback) {

@@ -9,13 +9,13 @@ const Qna = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch('https://testback01-production.up.railway.app', {
+        const response = await fetch('https://testback01-production.up.railway.app/api/contact', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+              'Content-Type': 'application/json',
             },
             body: JSON.stringify({ name, email, message }),
-        });
+          });
 
         if (response.ok) {
             alert('문의가 성공적으로 전송되었습니다!');
