@@ -1,10 +1,13 @@
+
+require('dotenv').config();
+
 const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // 미들웨어 설정
 app.use(cors());
@@ -21,13 +24,13 @@ app.post('/api/contact', (req, res) => {
         port: 465,
         secure: true,
         auth: {
-          user: 'jjw1914@naver.com',
-          pass: 'L97LPQG1516B',
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
         },
       });
 
     const mailOptions = {
-        from: 'jjw1914@naver.com',      // 발신자: 본인 이메일 고정
+        from: process.env.EMAIL_USER,      // 발신자: 본인 이메일 고정
         to: 'wodn1914@daum.net', // 이메일을 받을 다음 주소
         replyTo: email,                 // 사용자가 입력한 이메일
         subject: `고객 문의: ${name}`,
