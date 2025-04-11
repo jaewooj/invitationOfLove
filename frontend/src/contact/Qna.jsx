@@ -9,7 +9,7 @@ const Qna = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await fetch('http://testback01-production.up.railway.app', {
+        const response = await fetch('https://testback01-production.up.railway.app', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

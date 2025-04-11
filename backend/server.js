@@ -9,6 +9,20 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5000;
 
+
+// CORS 허용 도메인 명확히 지정
+const allowedOrigins = ['https://shoosetosister.netlify.app'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
+
 // 미들웨어 설정
 app.use(cors());
 app.use(bodyParser.json());
