@@ -16,22 +16,19 @@ const allowedOrigins = [
     'https://shoosetosister.netlify.app/' // ← 이것도 허용
   ];
 
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-}));
+  app.use(cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin.replace(/\/$/, ''))) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS: ' + origin));
+      }
+    },
+    credentials: true // 필요시 세션/쿠키 허용
+  }));
 
 // 미들웨어 설정
-app.use(cors());
 app.use(bodyParser.json());
-app.use(cors({
-    origin: 'https://shoosetosister.netlify.app/'
-  }));
 
 app.post('/api/contact', (req, res) => {
     const { name, email, message } = req.body;
