@@ -1,0 +1,75 @@
+@media (max-width: 768px) { 
+    .dashboard {
+        /* border: 1px solid blue; */
+        height: 100%;
+        width: 100%;
+        display: flex;
+        position: relative;
+        box-sizing: border-box;
+        flex-direction: column;
+    }
+    .dashboard .imgContainer {
+        display: block;
+        padding-top: 20px;
+    }
+    .dashboard .imgContainer .mainImg {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: auto;
+    }
+    .gradientOverlay {
+        position: absolute;
+        z-index: 2;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 50%; /* 그라데이션이 적용될 높이 */
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    }
+    .dashboard .inner {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        border: 0px solid red;
+        z-index: 1;
+    }
+    
+    .dashboard .inner {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 10px 0px;
+    }
+    .dashboard .inner img{
+        padding-top: 20px;
+        width: 100%;
+    }
+    .dashboard .inner .dots {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 3;
+    }
+    .dashboard .inner .dot {
+        width: 20px; /* 크기 조정 */
+        height: 20px; /* 크기 조정 */
+        margin: 10px 5px;
+        padding: 0px 5px;
+        box-sizing: border-box;
+        background-color: #c9e045cc; /* 기본 색은 흰색 */
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* 약간의 그림자 효과 */
+    }
+
+    .dashboard .inner .dot.active {
+        background-color: #e9c686e5; /* 선택된 버튼은 베이지색 */
+    }
+}

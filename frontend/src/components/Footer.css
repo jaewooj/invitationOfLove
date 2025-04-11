@@ -1,0 +1,59 @@
+@media (min-width: 768px) {
+    
+    #footer {
+        margin-top: 80px;
+        width: 100%; 
+        height: 220px;
+        /* background: #ededed; */
+        /* background: #495860; */
+        color: #b3b3b3;
+        background: #ece9e9;
+    }
+    #footer .inner {
+        width: 1400px;
+        margin: 0 auto;
+        height: 220px;
+        padding-top: 30px;
+        display: flex;
+        padding-left: 10px;
+        /* border: 1px solid #fff; */
+    }
+    #footer .inner .logoDiv {
+        width: 30%;
+
+    }
+    #footer .inner .logoDiv p {
+        font-size: 36px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 5px;
+        color: #b3b3b3;
+    }
+    #footer .inner .logoDiv img {
+        /* width: 80%; */
+        height: 50%;
+        margin: 0 auto;
+        display: block;
+        color: #b3b3b3;
+    }
+    #footer .inner .copCon {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        margin-left: 70px;
+    }
+    #footer .inner .copCon .first, .sec, .third {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+    }
+    #footer .inner .copCon .first p:first-child {
+        color: #fcc038;
+    }
+    #footer .inner .copCon p {
+        margin-right: 20px;
+        font-size: 0.95rem;
+        color: #b3b3b3;
+    }
+
+}

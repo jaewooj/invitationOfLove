@@ -1,0 +1,106 @@
+@media (min-width:768px){
+    #wrap {
+        width: 100%;
+        min-width: 1770px;
+        height: 100%;
+        /* background: rgb(255,255,255,0.3); */
+        box-sizing: border-box;
+        position: relative;
+        transition: background 0.5s ease; 
+        z-index: 3;
+    }
+    #wrap.on {
+        position: relative;
+        z-index: 4;
+        transition: background 0.3s ease;
+    }
+    #wrap .menuBg {
+        position: absolute;
+        z-index: 0;
+        visibility: hidden;
+        height: 100%;
+        width: 100%;
+        background: rgba(212, 212, 212, 0.5); 
+    }
+    #wrap .menuBg.on {
+        z-index: 3;
+        visibility: visible;
+    
+    }
+    #wrap .main {
+        width: 100%;
+        height: 100%;
+        /* border: 1px solid #000; */
+        position: relative;
+        box-sizing: border-box;
+    }
+    #wrap .main .inner {
+        position: relative;
+        box-sizing: border-box;
+    }
+    #wrap .menuDiv {
+        width: 100%;
+        background: #fff;
+        position: absolute;
+        z-index: 2;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        /* 
+        height: 380px;
+        opacity: 0; 
+        visibility: hidden; 
+        transform: translateY(-100%);
+        transition: transform 0.4s ease-in-out, opacity 0.2s ease-in-out, visibility 0.3s;  */
+    }
+    #wrap .menuDiv.on {
+        /* z-index: 3;
+        opacity: 1; 
+        visibility: visible; 
+        transform: translateY(0); */
+        max-height: 380px;
+        overflow: visible;
+        z-index: 3;
+    }
+    #wrap .menuList {
+        margin-left: 540px;
+        display: flex;
+        height: 100%;
+        padding-bottom: 20px;
+    }
+    #wrap .menuList li {
+        width: 230px;
+    }
+    #wrap .menuList li ul {
+        
+    }
+    #wrap .menuList li ul li {
+        /* color: #cacaca; */
+        width: 100%;
+        color: #858585;
+        font-size: 22px;
+        margin: 35px 0;
+        padding: 0px 0;
+        font-weight: 500;
+    }
+    #wrap .menuList li ul li a{
+        width: 100%;
+        color: #858585;
+        font-size: 22px;
+        margin: 35px 0;
+        padding: 0px 0;
+        cursor: pointer;
+        font-weight:400;
+    }
+    #wrap .menuList li ul li.hovered a {
+        /* color: #616161; */
+        color: #ee8132;
+        font-weight: 500;
+        transition: color 0.5s ease;
+    }
+    #wrap .menuList li ul li.hovered {
+        color: #616161;
+        font-weight: 500;
+        transition: color 0.5s ease;
+    }
+}
