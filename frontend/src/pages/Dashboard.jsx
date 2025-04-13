@@ -55,8 +55,8 @@ const Dashboard = () => {
             <div className="gallery-section">
                 <h2>갤러리</h2>
                 <div className="gallery">
-                    <img src="사진URL1" alt="갤러리1" />
-                    <img src="사진URL2" alt="갤러리2" />
+                    <img src="/images/main_img.png" alt="갤러리1" />
+                    <img src="/images/main_img.png" alt="갤러리2" />
                 </div>
             </div>
 
