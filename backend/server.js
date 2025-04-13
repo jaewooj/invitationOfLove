@@ -1,7 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
-require('dotenv').config();
+
 console.log('DB 환경 변수:', {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
