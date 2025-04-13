@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -11,12 +12,11 @@ console.log('DB 환경 변수:', {
   port: process.env.DB_PORT,
 });
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
 // CORS 설정
 const allowedOrigins = [
   'https://invitationoflove.netlify.app',
-  'http://localhost:3000',
 ];
 
 app.use(cors({
