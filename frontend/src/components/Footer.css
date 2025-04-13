@@ -1,59 +1,53 @@
-@media (min-width: 768px) {
-    
-    #footer {
-        margin-top: 80px;
-        width: 100%; 
-        height: 220px;
-        /* background: #ededed; */
-        /* background: #495860; */
-        color: #b3b3b3;
-        background: #ece9e9;
-    }
-    #footer .inner {
-        width: 1400px;
-        margin: 0 auto;
-        height: 220px;
-        padding-top: 30px;
-        display: flex;
-        padding-left: 10px;
-        /* border: 1px solid #fff; */
-    }
-    #footer .inner .logoDiv {
-        width: 30%;
 
+    #footer {
+        position: relative;
+        width: 100%;
+        height: auto; /* 높이 자동 조정 */
+        color: #b3b3b3; /* 텍스트 색상 유지 */
+        padding: 20px; /* 내부 패딩 추가 */
+        box-sizing: border-box; /* 패딩 포함 크기 계산 */
     }
-    #footer .inner .logoDiv p {
-        font-size: 36px;
-        font-weight: 600;
-        text-align: center;
-        margin-bottom: 5px;
-        color: #b3b3b3;
+
+    #footer .inner {
+        display: flex;
+        width: 100%; /* 너비 100% */
+        margin: 0; /* 외부 여백 제거 */
+        height: auto; /* 높이 자동 조정 */
+        padding-top: 20px; /* 상단 패딩 축소 */
+        flex-direction: column; /* 수직 정렬 */
+        align-items: center; /* 가운데 정렬 */
+        padding-left: 0; /* 왼쪽 패딩 제거 */
     }
-    #footer .inner .logoDiv img {
-        /* width: 80%; */
-        height: 50%;
-        margin: 0 auto;
-        display: block;
-        color: #b3b3b3;
-    }
+
     #footer .inner .copCon {
-        margin-top: 30px;
-        display: flex;
-        flex-direction: column;
-        margin-left: 70px;
-    }
-    #footer .inner .copCon .first, .sec, .third {
-        display: flex;
-        flex-direction: row;
+        margin-top: 10px; /* 상단 여백 조정 */
         margin-bottom: 10px;
+        width: 100%; /* 너비 100% */
+    }
+
+    #footer .inner .copCon .first, 
+    .sec {
+        flex-direction: row;
+        margin-bottom: 5px; /* 하단 여백 조정 */
+        align-items: start; /* 텍스트 가운데 정렬 */
+        flex-wrap: wrap;   /* 내부 요소가 넘칠 경우 줄바꿈 */
+    }
+    #footer .inner .copCon .third {
+        flex-direction: column;
+        margin-bottom: 5px; /* 하단 여백 조정 */
+        align-items: start; /* 텍스트 가운데 정렬 */
+        flex-wrap: wrap;   /* 내부 요소가 넘칠 경우 줄바꿈 */
     }
     #footer .inner .copCon .first p:first-child {
-        color: #fcc038;
-    }
-    #footer .inner .copCon p {
-        margin-right: 20px;
-        font-size: 0.95rem;
-        color: #b3b3b3;
+        color: #fcc038; /* 강조 색상 유지 */
     }
 
-}
+    #footer .inner .copCon p {
+        font-size: 0.6rem; /* 글자 크기 축소 */
+        text-align: left; /* 텍스트 가운데 정렬 */
+        color: #b3b3b3; /* 텍스트 색상 유지 */
+        width: 100%;
+        word-break: break-word;
+        white-space: normal;
+        overflow-wrap: break-word; /* ✅ 추가 */
+    }

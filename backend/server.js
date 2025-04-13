@@ -1,67 +1,98 @@
-
+const express = require('express');
+const mysql = require('mysql2');
+const cors = require('cors');
 require('dotenv').config();
 
-const express = require('express');
-const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 
+app.use(cors());
+app.use(express.json());
 
-// CORS 허용 도메인 명확히 지정
-const allowedOrigins = [
-    'https://shoosetosister.netlify.app',
-    'https://shoosetosister.netlify.app/' // ← 이것도 허용
-  ];
+// MySQL 연결 설정
+const db = mysql.createConnection({
+    host: process.env.DB_HOST,  // Railway 배포 시 환경변수로 변경
+    user: process.env.DB_USER, 
+    password: process.env.DB_PASSWORD,
+});
 
-  app.use(cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin.replace(/\/$/, ''))) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS: ' + origin));
-      }
-    },
-    credentials: true // 필요시 세션/쿠키 허용
-  }));
+// DB 연결 및 데이터베이스, 테이블 자동 생성
+db.connect((err) => {
+    if (err) {
+        console.error('MySQL 연결 실패:', err);
+        return;
+    }
+    console.log('MySQL 연결 성공!');
 
-// 미들웨어 설정
-app.use(bodyParser.json());
-
-app.post('/api/contact', (req, res) => {
-    const { name, email, message } = req.body;
-
-    const transporter = nodemailer.createTransport({
-        host: 'smtp.naver.com',
-        port: 465,
-        secure: true,
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
-        },
-      });
-
-    const mailOptions = {
-        from: process.env.EMAIL_USER,      // 발신자: 본인 이메일 고정
-        to: 'wodn1914@daum.net', // 이메일을 받을 다음 주소
-        replyTo: email,                 // 사용자가 입력한 이메일
-        subject: `고객 문의: ${name}`,
-        text: message,
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error(error);
-            res.status(500).send('문의 전송에 실패했습니다.');
+    // 데이터베이스가 존재하지 않으면 생성
+    const createDatabaseQuery = `CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME || 'invitationoflove'}`;
+    db.query(createDatabaseQuery, (err, result) => {
+        if (err) {
+            console.error('데이터베이스 생성 실패:', err);
         } else {
-            console.log('Email sent: ' + info.response);
-            res.status(200).send('문의가 성공적으로 전송되었습니다!');
+            console.log('✅ 데이터베이스 확인 완료!');
         }
+
+        // 데이터베이스 선택
+        db.changeUser({ database: process.env.DB_NAME || 'invitationoflove' }, (err) => {
+            if (err) {
+                console.error('데이터베이스 변경 실패:', err);
+                return;
+            }
+
+            // ✅ 테이블이 없으면 자동 생성
+            const createTableQuery = `
+                CREATE TABLE IF NOT EXISTS guestbook (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    name VARCHAR(100) NOT NULL,
+                    message TEXT NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            `;
+            db.query(createTableQuery, (err, result) => {
+                if (err) {
+                    console.error('테이블 생성 실패:', err);
+                } else {
+                    console.log('✅ guestbook 테이블 확인 완료!');
+                }
+            });
+        });
     });
 });
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+// 방명록 글 저장 API (POST)
+app.post('/api/guestbook', (req, res) => {
+  const { name, message } = req.body;
+
+  // 이름과 메시지가 없으면 오류 응답
+  if (!name || !message) {
+      return res.status(400).json({ error: '이름과 메시지를 모두 입력해야 합니다.' });
+  }
+
+  // 방명록 글을 데이터베이스에 저장
+  const query = 'INSERT INTO guestbook (name, message) VALUES (?, ?)';
+  db.query(query, [name, message], (err, result) => {
+      if (err) {
+          console.error('방명록 저장 실패:', err);
+          return res.status(500).json({ error: '데이터베이스 오류' });
+      }
+      console.log('방명록 저장 성공:', result);
+      res.status(200).json({ message: '방명록이 저장되었습니다.' });
+  });
+});
+// 방명록 목록 조회 API (GET)
+app.get('/api/guestbook', (req, res) => {
+  const query = 'SELECT * FROM guestbook ORDER BY created_at DESC';
+  db.query(query, (err, result) => {
+      if (err) {
+          console.error('방명록 조회 실패:', err);
+          return res.status(500).json({ error: '데이터베이스 오류' });
+      }
+      console.log('방명록 조회 성공:', result);
+      res.status(200).json(result);  // 방명록 데이터를 반환
+  });
+});
+// 서버 실행
+app.listen(PORT, () => {
+    console.log(`서버가 ${PORT} 포트에서 실행 중입니다.`);
 });

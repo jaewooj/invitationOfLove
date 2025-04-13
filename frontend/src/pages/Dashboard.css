@@ -1,13 +1,12 @@
-@media (min-width: 768px) { 
-    .dashboard {
-        /* border: 1px solid blue; */
+    /* .dashboard {
         height: 100%;
         width: 100%;
         display: flex;
         position: relative;
         box-sizing: border-box;
         flex-direction: column;
-    }
+        border: 3px solid #000;
+    } */
     .dashboard .imgContainer {
         position: relative;
         z-index: 2;
@@ -36,8 +35,66 @@
     .dashboard .inner {
         position: relative;
         height: 100%;
-        width: 1400px;
+        width: 100%;
         border: 0px solid red;
         z-index: 1;
     }
-}
+
+    /* 청첩장 css */
+    .dashboard {
+        max-width: 500px;
+        margin: 0 auto;
+        font-family: 'Noto Sans KR', sans-serif;
+        background: #fff;
+        color: #333;
+        line-height: 1.5;
+      }
+    
+      .hero-section {
+        text-align: center;
+        padding: 20px;
+      }
+    
+      .hero-image {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+      }
+    
+      .hero-title {
+        font-size: 1.5rem;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    
+      .hero-names {
+        font-size: 1.2rem;
+        margin-top: 5px;
+      }
+    
+      .hero-date {
+        color: #888;
+        font-size: 0.9rem;
+      }
+    
+      .intro-section,
+      .schedule-section,
+      .gallery-section,
+      .account-section,
+      .contact-section {
+        padding: 20px;
+        border-top: 1px solid #eee;
+      }
+    
+      .gallery img {
+        width: 48%;
+        margin: 1%;
+        border-radius: 8px;
+      }
+    
+      .footer-section {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.8rem;
+        color: #aaa;
+      }
