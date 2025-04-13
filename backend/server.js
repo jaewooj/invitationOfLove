@@ -1,6 +1,5 @@
 require('dotenv').config();
 
-
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
@@ -14,12 +13,12 @@ console.log('DB 환경 변수:', {
 });
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001; // 환경변수 PORT 사용, 없으면 3001
 
 // CORS 설정
 const allowedOrigins = [
   'https://invitationoflove.netlify.app',
-  'https://invitationoflove.netlify.app/'
+  'https://invitationoflove.netlify.app/', // 경로 끝에 / 추가한 것과 빼는 것을 동일하게 처리
 ];
 
 app.use(cors({
@@ -32,6 +31,7 @@ app.use(cors({
   },
   methods: ['GET', 'POST'],
 }));
+
 app.use(express.json());
 
 // MySQL 연결 풀 설정
@@ -45,6 +45,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
 });
+
 // DB 연결 및 데이터베이스, 테이블 자동 생성
 pool.getConnection((err, connection) => {
   if (err) {
@@ -69,7 +70,7 @@ pool.getConnection((err, connection) => {
         return;
       }
 
-      // ✅ 테이블이 없으면 자동 생성
+      // 테이블이 없으면 자동 생성
       const createTableQuery = `
         CREATE TABLE IF NOT EXISTS guestbook (
           id INT AUTO_INCREMENT PRIMARY KEY,
