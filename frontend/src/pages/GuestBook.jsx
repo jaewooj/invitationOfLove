@@ -9,7 +9,7 @@ const GuestBook = () => {
     // 방명록 글을 처음 렌더링할 때 가져오는 함수
     const fetchEntries = async () => {
         try {
-            const response = await fetch('http://localhost:3001/api/guestbook');
+            const response = await fetch('https://invitationoflove.up.railway.app/api/guestbook');
             const data = await response.json();
             setEntries(data); // 최신 방명록 목록으로 상태 업데이트
         } catch (error) {
@@ -30,7 +30,7 @@ const GuestBook = () => {
             const newEntry = { name, message };
 
             try {
-                const response = await fetch('http://localhost:3001/api/guestbook', {
+                const response = await fetch('https://invitationoflove.up.railway.app/api/guestbook', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
