@@ -20,10 +20,11 @@ app.use(express.json());
 
 // MySQL 연결 풀 설정
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,  // Railway 배포 시 환경변수로 변경
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME || 'invitationoflove',
+  host: process.env.MYSQLHOST,  // Railway 배포 시 환경변수로 변경
+  user: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE || 'invitationoflove',
+  port: process.env.MYSQLPORT || 3306,  // 22546 포트 사용
   waitForConnections: true,  // 연결 대기
   connectionLimit: 10,       // 최대 연결 수
   queueLimit: 0,             // 대기열 제한 없음
