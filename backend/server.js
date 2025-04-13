@@ -14,7 +14,7 @@ console.log('DB 환경 변수:', {
 });
 
 const app = express();
-const PORT = process.env.DB_PORT || 3001;
+const PORT = 3001;
 
 // CORS 설정
 const allowedOrigins = [
@@ -23,7 +23,13 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS 정책에 의해 차단된 요청입니다.'));
+    }
+  },
   methods: ['GET', 'POST'],
 }));
 app.use(express.json());
