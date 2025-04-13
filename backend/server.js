@@ -1,5 +1,10 @@
 require('dotenv').config();
 
+
+const express = require('express');
+const mysql = require('mysql2');
+const cors = require('cors');
+
 console.log('DB 환경 변수:', {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -8,12 +13,8 @@ console.log('DB 환경 변수:', {
   port: process.env.DB_PORT,
 });
 
-const express = require('express');
-const mysql = require('mysql2');
-const cors = require('cors');
-
 const app = express();
-const PORT = process.env.DB_PORT1;
+const PORT = process.env.DB_PORT || 3001;
 
 // CORS 설정
 const allowedOrigins = [
