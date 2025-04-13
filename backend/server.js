@@ -29,6 +29,13 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
 });
+console.log('DB 환경 변수:', {
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+});
 // DB 연결 및 데이터베이스, 테이블 자동 생성
 pool.getConnection((err, connection) => {
   if (err) {
