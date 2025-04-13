@@ -5,14 +5,14 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 console.log('DB 환경 변수:', {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT,
+  host: process.env.DB_HOST1,
+  user: process.env.DB_USER1,
+  password: process.env.DB_PASSWORD1,
+  database: process.env.DB_NAME1,
+  port: process.env.DB_PORT1,
 });
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.DB_PORT1;
 
 // CORS 설정
 const allowedOrigins = [
@@ -27,21 +27,21 @@ app.use(express.json());
 
 // MySQL 연결 풀 설정
 const pool = mysql.createPool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: process.env.DB_HOST1,
+  port: process.env.DB_PORT1,
+  user: process.env.DB_USER1,
+  password: process.env.DB_PASSWORD1,
+  database: process.env.DB_NAME1,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
 });
 console.log('DB 환경 변수:', {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT,
+  host: process.env.DB_HOST1,
+  user: process.env.DB_USER1,
+  password: process.env.DB_PASSWORD1,
+  database: process.env.DB_NAME1,
+  port: process.env.DB_PORT1,
 });
 // DB 연결 및 데이터베이스, 테이블 자동 생성
 pool.getConnection((err, connection) => {
