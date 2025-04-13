@@ -20,13 +20,14 @@ app.use(express.json());
 
 // MySQL 연결 풀 설정
 const pool = mysql.createPool({
-  user: process.env.MYSQLUSER,     // MySQL 사용자 (예: root)
-  password: process.env.MYSQLPASSWORD, // MySQL 비밀번호
-  database: process.env.MYSQL_DATABASE, // 데이터베이스 이름
-  port: process.env.MYSQLPORT || 3306, // 포트 (기본값 3306)
-  waitForConnections: true,      // 연결 대기
-  connectionLimit: 10,           // 최대 연결 수
-  queueLimit: 0,                 // 대기열 제한 없음
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 // DB 연결 및 데이터베이스, 테이블 자동 생성
 pool.getConnection((err, connection) => {
