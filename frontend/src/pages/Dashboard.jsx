@@ -11,7 +11,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchEntries = async () => {
             try {
-                const response = await fetch('http://localhost:3001/api/guestbook');
+                const response = await fetch('https://invitationoflove.up.railway.app/api/guestbook');
                 if (response.ok) {
                     const data = await response.json();
                     setEntries(data); // 방명록 데이터를 state에 저장

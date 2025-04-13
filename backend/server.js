@@ -6,7 +6,16 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors());
+// app.use(cors());
+const allowedOrigins = [
+  'https://invitationoflove.netlify.app',
+  'http://localhost:3000',
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST'],
+}));
 app.use(express.json());
 
 // MySQL 연결 설정
