@@ -154,3 +154,20 @@
   animation-duration: 6s;
   animation-delay: -1s;
 }
+
+/* 뮤직 */
+.music-control {
+  position: absolute;
+  z-index: 999;
+}
+
+.music-control button {
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 10px;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  cursor: pointer;
+}

@@ -7,6 +7,9 @@ const Dashboard = () => {
     const [name, setName] = useState('');
     const [message, setMessage] = useState('');
 
+    const [isPlaying, setIsPlaying] = useState(true);
+    const audioRef = React.useRef(null);
+
     // 방명록 데이터를 서버에서 가져오는 함수
     useEffect(() => {
         const fetchEntries = async () => {
@@ -49,10 +52,27 @@ const Dashboard = () => {
         return flowers;
     };
 
+    const toggleMusic = () => {
+        if (audioRef.current) {
+            if (audioRef.current.paused) {
+                audioRef.current.play();
+                setIsPlaying(true);
+            } else {
+                audioRef.current.pause();
+                setIsPlaying(false);
+            }
+        }
+    };
 
     return (
         <div className="dashboard">
             <div className="hero-section">
+                <div className="music-control">
+                    <audio ref={audioRef} src="/music/music1.mp3" autoPlay loop />
+                    <button onClick={toggleMusic}>
+                        {isPlaying ? 'Pause Music' : 'Play Music'}
+                    </button>
+                </div>
                 <div className="mainImg">
                     <img src="/images/main_img.png" alt="결혼사진" className="hero-image" />
                     {/* 꽃내리는 애니메이션 */}
