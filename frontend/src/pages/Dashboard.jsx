@@ -63,6 +63,29 @@ const Dashboard = () => {
             }
         }
     };
+    useEffect(() => {
+        const audio = audioRef.current;
+    
+        const tryPlayAudio = () => {
+            if (audio) {
+                const playPromise = audio.play();
+    
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            setIsPlaying(true);
+                        })
+                        .catch((error) => {
+                            console.warn('브라우저 정책으로 자동 재생 차단됨:', error);
+                            setIsPlaying(false);
+                        });
+                }
+            }
+        };
+    
+        // iOS 등에서는 상호작용 전까지 차단될 수 있음
+        tryPlayAudio();
+    }, []);
 
     return (
         <div className="dashboard">
