@@ -26,13 +26,45 @@ const Dashboard = () => {
         fetchEntries();
     }, []); // 컴포넌트가 마운트될 때 한 번만 실행
 
+
+    // 꽃 요소를 랜덤하게 생성하는 함수
+    const createFlowers = () => {
+        const flowerCount = 15; // 떨어뜨릴 꽃 개수
+        const flowers = [];
+        for (let i = 0; i < flowerCount; i++) {
+            flowers.push(
+                <img 
+                    key={i} 
+                    src="/images/flower.png"  // 꽃 이미지 경로
+                    alt="꽃"
+                    className="flower"
+                    style={{
+                        left: `${Math.random() * 100}%`,
+                        animationDuration: `${Math.random() * 5 + 4}s`,  // 애니메이션 속도 랜덤화
+                        animationDelay: `${Math.random() * 5}s`  // 애니메이션 시작 시간 랜덤화
+                    }}
+                />
+            );
+        }
+        return flowers;
+    };
+
+
     return (
         <div className="dashboard">
             <div className="hero-section">
-                <img src="/images/main_img.png" alt="결혼사진" className="hero-image" />
-                <h1 className="hero-title">초대합니다</h1>
-                <p className="hero-names">지훈 ❤️ 예진</p>
-                <p className="hero-date">2025년 4월 6일 일요일 오후 1시</p>
+                <div className="mainImg">
+                    <img src="/images/main_img.png" alt="결혼사진" className="hero-image" />
+                    {/* 꽃내리는 애니메이션 */}
+                    {createFlowers()}
+
+                </div>
+                <div className="mainTitle01">
+                    <h1 className="hero-title">초대합니다</h1>
+                    <p className="hero-names">지훈 ❤️ 예진</p>
+                    <p className="hero-date">2025년 4월 6일 일요일 오후 1시</p>
+
+                </div>
             </div>
 
             {/* 소개 섹션 */}
