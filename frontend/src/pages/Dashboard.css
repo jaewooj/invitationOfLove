@@ -98,6 +98,34 @@
         padding: 20px;
         border-top: 1px solid #eee;
       }
+      
+      .intro-section {
+        padding: 60px 20px 40px 20px;
+        text-align: center;
+        background-color: #fffaf7;
+        color: #5c4b3b;
+        font-family: 'Gowun Batang', 'Noto Serif KR', serif;
+        font-size: 1.1rem;
+        line-height: 2;
+        letter-spacing: 0.05em;
+
+      }
+      .intro-section p {
+        margin: 12px 0;
+        font-weight: 400;
+      }
+
+      .intro-section .parents-info {
+        margin-top: 40px;
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #444;
+        font-weight: 500;
+      }
+      .intro-section .parents-info strong {
+        font-weight: 600;
+        color: #333;
+      }
     
       .gallery img {
         width: 48%;
@@ -170,4 +198,76 @@
   font-size: 14px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   cursor: pointer;
+}
+
+/* 일정 섹션 스타일 */
+.schedule-section {
+  text-align: center;
+  margin: 60px 0;
+  font-family: 'Noto Serif KR', serif;
+}
+
+.schedule-datetime {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.schedule-subtext {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.calendar {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #888;
+}
+
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  font-size: 0.95rem;
+}
+
+.calendar-cell {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.highlight-day {
+  background-color: #6e754a;
+  color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 지도 섹션 스타일 */
+.map-section {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.map-image {
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  margin-top: 16px;
 }
