@@ -6,6 +6,7 @@
         color: #b3b3b3; /* 텍스트 색상 유지 */
         padding: 20px; /* 내부 패딩 추가 */
         box-sizing: border-box; /* 패딩 포함 크기 계산 */
+        font-family: 'Gowun Batang', 'Noto Serif KR', serif;
     }
 
     #footer .inner {

@@ -244,7 +244,7 @@ const Dashboard = () => {
                     id="map"
                     // ref={mapContainerRef}
                     ref={mapRef}
-                    style={{ width: '100%', height: '400px', borderRadius: '12px', marginTop: '10px' }}
+                    style={{ width: '100%', height: '300px', borderRadius: '12px', marginTop: '10px' }}
                 ></div>
                 <p>
                     지도를 자세히 보려면{" "}
@@ -256,7 +256,7 @@ const Dashboard = () => {
                         여기를 눌러주세요
                     </a>
                 </p>
-                <div style={{ marginTop: '16px', display: 'flex', gap: '10px' }}>
+                <div style={{ marginTop: '16px', display: 'flex', justifyContent:'center', gap: '10px' }}>
                     <a
                         href={`https://map.kakao.com/link/to/웨스턴팰리스웨딩하우스,37.51583923789284, 126.72252151056179`}
                         target="_blank"
@@ -290,7 +290,7 @@ const Dashboard = () => {
                     </a>
 
                     <a
-                        href={`nmap://route/car?dlat37.51583923789284&dlng=126.72252151056179&dname=웨스턴팰리스웨딩하우스&appname=com.example.myapp`}
+                        href={`nmap://route/car?dlat=37.51583923789284&dlng=126.72252151056179&dname=웨스턴팰리스웨딩하우스&appname=com.example.myapp`}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{

@@ -55,6 +55,7 @@
         text-align: center;
         overflow: hidden;
         padding: 20px;
+        font-family: 'Gowun Batang', 'Noto Serif KR', serif;
       }
     
       .hero-image {
@@ -65,7 +66,11 @@
         border-radius: 12px;
       }
       .mainTitle01 {
-        padding-top: 20px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+      }
+      .mainTitle01 p {
+        padding: 10px 0px;
       }
       .hero-title {
         font-size: 1.5rem;
@@ -97,6 +102,7 @@
       .contact-section {
         padding: 20px;
         border-top: 1px solid #eee;
+        font-family: 'Gowun Batang', 'Noto Serif KR', serif;
       }
       
       .intro-section {
@@ -113,6 +119,7 @@
       .intro-section p {
         margin: 12px 0;
         font-weight: 400;
+        font-family: 'Gowun Batang', 'Noto Serif KR', serif;
       }
 
       .intro-section .parents-info {
@@ -203,8 +210,12 @@
 /* 일정 섹션 스타일 */
 .schedule-section {
   text-align: center;
-  margin: 60px 0;
+  padding: 80px 0px 40px 0px;
   font-family: 'Noto Serif KR', serif;
+}
+.schedule-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 30px;
 }
 
 .schedule-datetime {
@@ -233,20 +244,20 @@
 }
 
 .calendar-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  font-size: 0.95rem;
-}
-
-.calendar-cell {
-  width: 32px;
-  height: 32px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
 }
 
+.calendar-header span,
+.calendar-cell {
+  width: 14.28%; /* 100% / 7일 */
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-size: 14px;
+}
 .highlight-day {
   background-color: #6e754a;
   color: white;
@@ -262,6 +273,8 @@
 .map-section {
   text-align: center;
   margin-top: 40px;
+  font-family: 'Gowun Batang', 'Noto Serif KR', serif;
+  padding: 40px 0px;
 }
 
 .map-image {
