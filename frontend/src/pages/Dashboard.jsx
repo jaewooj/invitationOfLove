@@ -9,6 +9,7 @@ const Dashboard = () => {
 
     const [isPlaying, setIsPlaying] = useState(true);
     const audioRef = React.useRef(null);
+    let interval;
 
     // 방명록 데이터를 서버에서 가져오는 함수
     useEffect(() => {
@@ -63,7 +64,7 @@ const Dashboard = () => {
             }
         }
     };
-    
+
     useEffect(() => {
         const audio = audioRef.current;
     
@@ -92,27 +93,35 @@ const Dashboard = () => {
     const mapContainerRef = useRef(null); // 지도를 렌더링할 DOM 참조
 
     useEffect(() => {
+        const tryInitializeMap = () => {
+            if (window.kakao && window.kakao.maps) {
+                const mapContainer = mapContainerRef.current;
+                const mapOption = {
+                    center: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
+                    level: 3,
+                };
+    
+                const map = new window.kakao.maps.Map(mapContainer, mapOption);
+    
+                const marker = new window.kakao.maps.Marker({
+                    position: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
+                });
+                marker.setMap(map);
+            }
+        };
+    
         if (window.kakao && window.kakao.maps) {
-            const mapContainer = mapContainerRef.current;
-    
-            const mapOption = {
-                center: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179), // 웨스턴팰리스 위치 (위도, 경도)
-                level: 3, // 지도 확대 레벨
-            };
-    
-            const map = new window.kakao.maps.Map(mapContainer, mapOption);
-    
-            const markerPosition = new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179);
-            const marker = new window.kakao.maps.Marker({
-                position: markerPosition,
-            });
-            marker.setMap(map);
-    
-            const infowindow = new window.kakao.maps.InfoWindow({
-                content: '<div style="padding:5px;font-size:14px;">웨스턴팰리스웨딩하우스</div>',
-            });
-            infowindow.open(map, marker);
+            tryInitializeMap();
+        } else {
+            const interval = setInterval(() => {
+                if (window.kakao && window.kakao.maps) {
+                    clearInterval(interval);
+                    tryInitializeMap();
+                }
+            }, 300);
         }
+    
+        return () => clearInterval(interval);
     }, []);
 
     return (
@@ -189,7 +198,7 @@ const Dashboard = () => {
                 <h2>오시는 길</h2>
                 <p><strong>주소:</strong> 인천 부평구 부평대로 283 웨스턴팰리스웨딩하우스</p>
                 <div
-                    id="map"
+                    id="map" className='map-image'
                     ref={mapContainerRef}
                     style={{ width: '100%', height: '400px', borderRadius: '12px', marginTop: '10px' }}
                 ></div>
