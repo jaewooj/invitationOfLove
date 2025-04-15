@@ -90,38 +90,45 @@ const Dashboard = () => {
     }, []);
     
     /* 지도 */
+    
     const mapContainerRef = useRef(null); // 지도를 렌더링할 DOM 참조
 
     useEffect(() => {
-        const tryInitializeMap = () => {
+        const mapContainer = mapContainerRef.current;
+    
+        const initializeMap = () => {
+            const mapOption = {
+                center: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
+                level: 3,
+            };
+    
+            const map = new window.kakao.maps.Map(mapContainer, mapOption);
+    
+            const marker = new window.kakao.maps.Marker({
+                position: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
+            });
+    
+            marker.setMap(map);
+        };
+    
+        const loadKakaoMap = () => {
             if (window.kakao && window.kakao.maps) {
-                const mapContainer = mapContainerRef.current;
-                const mapOption = {
-                    center: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
-                    level: 3,
-                };
-    
-                const map = new window.kakao.maps.Map(mapContainer, mapOption);
-    
-                const marker = new window.kakao.maps.Marker({
-                    position: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
+                window.kakao.maps.load(() => {
+                    initializeMap();
                 });
-                marker.setMap(map);
             }
         };
     
         if (window.kakao && window.kakao.maps) {
-            tryInitializeMap();
+            loadKakaoMap();
         } else {
-            const interval = setInterval(() => {
+            const checkInterval = setInterval(() => {
                 if (window.kakao && window.kakao.maps) {
-                    clearInterval(interval);
-                    tryInitializeMap();
+                    clearInterval(checkInterval);
+                    loadKakaoMap();
                 }
             }, 300);
         }
-    
-        return () => clearInterval(interval);
     }, []);
 
     return (
