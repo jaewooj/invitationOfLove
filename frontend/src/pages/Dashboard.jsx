@@ -63,6 +63,7 @@ const Dashboard = () => {
             }
         }
     };
+    
     useEffect(() => {
         const audio = audioRef.current;
     
@@ -86,11 +87,61 @@ const Dashboard = () => {
         // iOS 등에서는 상호작용 전까지 차단될 수 있음
         tryPlayAudio();
     }, []);
-<<<<<<< HEAD
-=======
+    const mapRef = useRef(null);
+
+    useEffect(() => {
+        if (window.kakao && window.kakao.maps) {
+            window.kakao.maps.load(() => {
+              const container = mapRef.current;
+              const options = {
+                center: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
+                level: 3,
+              };
+      
+              const map = new window.kakao.maps.Map(container, options);
+      
+              const marker = new window.kakao.maps.Marker({
+                position: options.center,
+                map,
+              });
+      
+              const infowindow = new window.kakao.maps.InfoWindow({
+                content: '<div style="padding:5px;font-size:14px;">웨스턴팰리스웨딩하우스</div>',
+              });
+              infowindow.open(map, marker);
+            });
+          }
+        }, []);
+      
+    /* const mapContainerRef = useRef(null); // 지도를 렌더링할 DOM 참조
+    useEffect(() => {
+        if (window.kakao && window.kakao.maps) {
+            window.kakao.maps.load(() => {
+                const mapContainer = mapContainerRef.current;
+    
+                const mapOption = {
+                    center: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
+                    level: 3,
+                };
+    
+                const map = new window.kakao.maps.Map(mapContainer, mapOption);
+    
+                const markerPosition = new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179);
+                const marker = new window.kakao.maps.Marker({
+                    position: markerPosition,
+                });
+                marker.setMap(map);
+    
+                const infowindow = new window.kakao.maps.InfoWindow({
+                    content: '<div style="padding:5px;font-size:14px;">웨스턴팰리스웨딩하우스</div>',
+                });
+                infowindow.open(map, marker);
+            });
+        }
+    }, []); */
     
     /* 지도 */
-    const mapContainerRef = useRef(null); // 지도를 렌더링할 DOM 참조
+    /* const mapContainerRef = useRef(null); // 지도를 렌더링할 DOM 참조
 
     useEffect(() => {
         if (window.kakao && window.kakao.maps) {
@@ -114,8 +165,7 @@ const Dashboard = () => {
             });
             infowindow.open(map, marker);
         }
-    }, []);
->>>>>>> 5cea17ed252992e3fa963d5922e71dfe4e46c0b6
+    }, []); */
 
     return (
         <div className="dashboard">
@@ -192,7 +242,8 @@ const Dashboard = () => {
                 <p><strong>주소:</strong> 인천 부평구 부평대로 283 웨스턴팰리스웨딩하우스</p>
                 <div
                     id="map"
-                    ref={mapContainerRef}
+                    // ref={mapContainerRef}
+                    ref={mapRef}
                     style={{ width: '100%', height: '400px', borderRadius: '12px', marginTop: '10px' }}
                 ></div>
                 <p>
