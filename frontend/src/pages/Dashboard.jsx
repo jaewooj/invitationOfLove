@@ -63,10 +63,7 @@ const Dashboard = () => {
             }
         }
     };
-<<<<<<< HEAD
-=======
     
->>>>>>> 55445d8 (일정 및 안내 추가)
     useEffect(() => {
         const audio = audioRef.current;
     
