@@ -32,17 +32,10 @@
         height: 50%; /* 그라데이션이 적용될 높이 */
         background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
     }
-    .dashboard .inner {
-        position: relative;
-        height: 100%;
-        width: 100%;
-        border: 0px solid red;
-        z-index: 1;
-    }
-
     /* 청첩장 css */
     .dashboard {
-        max-width: 500px;
+        width: 100%;
+        height: 100%;
         margin: 0 auto;
         font-family: 'Noto Sans KR', sans-serif;
         background: #fff;
@@ -54,7 +47,7 @@
         position: relative;
         text-align: center;
         overflow: hidden;
-        padding: 20px;
+        padding: 20px ;
         font-family: 'Gowun Batang', 'Noto Serif KR', serif;
       }
     
@@ -97,7 +90,6 @@
     
       .intro-section,
       .schedule-section,
-      .gallery-section,
       .account-section,
       .contact-section {
         padding: 20px;
@@ -272,9 +264,20 @@
 /* 지도 섹션 스타일 */
 .map-section {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 20px;
   font-family: 'Gowun Batang', 'Noto Serif KR', serif;
   padding: 40px 0px;
+}
+.map-section h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.map-section p {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+.map-section #map {
+  margin-bottom: 20px;
 }
 
 .map-image {

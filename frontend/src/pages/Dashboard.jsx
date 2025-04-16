@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Dashboard.css';
 import GuestBook from './GuestBook';
+import Gallery from './Gallery';
 
 const Dashboard = () => {
     const [entries, setEntries] = useState([]);
@@ -229,13 +230,7 @@ const Dashboard = () => {
             </div>
 
             {/* 갤러리 섹션 */}
-            <div className="gallery-section">
-                <h2>갤러리</h2>
-                <div className="gallery">
-                    <img src="/images/main_img.png" alt="갤러리1" />
-                    <img src="/images/main_img.png" alt="갤러리2" />
-                </div>
-            </div>
+            <Gallery/>
             {/* 지도 섹션 */}
             <div className="map-section">
                 <h2>오시는 길</h2>
