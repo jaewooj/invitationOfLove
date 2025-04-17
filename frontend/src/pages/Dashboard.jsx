@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './Dashboard.css';
 import GuestBook from './GuestBook';
+import Gallery from './Gallery';
 
 const Dashboard = () => {
     const [entries, setEntries] = useState([]);
@@ -88,35 +89,61 @@ const Dashboard = () => {
         // iOS 등에서는 상호작용 전까지 차단될 수 있음
         tryPlayAudio();
     }, []);
-    
+    const mapRef = useRef(null);
 
     useEffect(() => {
-        const audio = audioRef.current;
+        if (window.kakao && window.kakao.maps) {
+            window.kakao.maps.load(() => {
+              const container = mapRef.current;
+              const options = {
+                center: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
+                level: 3,
+              };
+      
+              const map = new window.kakao.maps.Map(container, options);
+      
+              const marker = new window.kakao.maps.Marker({
+                position: options.center,
+                map,
+              });
+      
+              const infowindow = new window.kakao.maps.InfoWindow({
+                content: '<div style="padding:5px;font-size:14px;">웨스턴팰리스웨딩하우스</div>',
+              });
+              infowindow.open(map, marker);
+            });
+          }
+        }, []);
+      
+    /* const mapContainerRef = useRef(null); // 지도를 렌더링할 DOM 참조
+    useEffect(() => {
+        if (window.kakao && window.kakao.maps) {
+            window.kakao.maps.load(() => {
+                const mapContainer = mapContainerRef.current;
     
-        const tryPlayAudio = () => {
-            if (audio) {
-                const playPromise = audio.play();
+                const mapOption = {
+                    center: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
+                    level: 3,
+                };
     
-                if (playPromise !== undefined) {
-                    playPromise
-                        .then(() => {
-                            setIsPlaying(true);
-                        })
-                        .catch((error) => {
-                            console.warn('브라우저 정책으로 자동 재생 차단됨:', error);
-                            setIsPlaying(false);
-                        });
-                }
-            }
-        };
+                const map = new window.kakao.maps.Map(mapContainer, mapOption);
     
-        // iOS 등에서는 상호작용 전까지 차단될 수 있음
-        tryPlayAudio();
-    }, []);
+                const markerPosition = new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179);
+                const marker = new window.kakao.maps.Marker({
+                    position: markerPosition,
+                });
+                marker.setMap(map);
+    
+                const infowindow = new window.kakao.maps.InfoWindow({
+                    content: '<div style="padding:5px;font-size:14px;">웨스턴팰리스웨딩하우스</div>',
+                });
+                infowindow.open(map, marker);
+            });
+        }
+    }, []); */
     
     /* 지도 */
-    
-    const mapContainerRef = useRef(null); // 지도를 렌더링할 DOM 참조
+    /* const mapContainerRef = useRef(null); // 지도를 렌더링할 DOM 참조
 
     useEffect(() => {
         const mapContainer = mapContainerRef.current;
@@ -154,7 +181,7 @@ const Dashboard = () => {
                 }
             }, 300);
         }
-    }, []);
+    }, []); */
 
     return (
         <div className="dashboard">
@@ -218,21 +245,16 @@ const Dashboard = () => {
             </div>
 
             {/* 갤러리 섹션 */}
-            <div className="gallery-section">
-                <h2>갤러리</h2>
-                <div className="gallery">
-                    <img src="/images/main_img.png" alt="갤러리1" />
-                    <img src="/images/main_img.png" alt="갤러리2" />
-                </div>
-            </div>
+            <Gallery/>
             {/* 지도 섹션 */}
             <div className="map-section">
                 <h2>오시는 길</h2>
                 <p><strong>주소:</strong> 인천 부평구 부평대로 283 웨스턴팰리스웨딩하우스</p>
                 <div
-                    id="map" className='map-image'
-                    ref={mapContainerRef}
-                    style={{ width: '100%', height: '400px', borderRadius: '12px', marginTop: '10px' }}
+                    id="map"
+                    // ref={mapContainerRef}
+                    ref={mapRef}
+                    style={{ width: '100%', height: '300px', borderRadius: '12px', marginTop: '10px' }}
                 ></div>
                 <p>
                     지도를 자세히 보려면{" "}
@@ -244,7 +266,7 @@ const Dashboard = () => {
                         여기를 눌러주세요
                     </a>
                 </p>
-                <div style={{ marginTop: '16px', display: 'flex', gap: '10px' }}>
+                <div style={{ marginTop: '16px', display: 'flex', justifyContent:'center', gap: '10px' }}>
                     <a
                         href={`https://map.kakao.com/link/to/웨스턴팰리스웨딩하우스,37.51583923789284, 126.72252151056179`}
                         target="_blank"
@@ -278,7 +300,7 @@ const Dashboard = () => {
                     </a>
 
                     <a
-                        href={`nmap://route/car?dlat37.51583923789284&dlng=126.72252151056179&dname=웨스턴팰리스웨딩하우스&appname=com.example.myapp`}
+                        href={`nmap://route/car?dlat=37.51583923789284&dlng=126.72252151056179&dname=웨스턴팰리스웨딩하우스&appname=com.example.myapp`}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{
