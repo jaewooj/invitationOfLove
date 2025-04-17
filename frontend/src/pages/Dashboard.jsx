@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import './Dashboard.css';
 import GuestBook from './GuestBook';
 import Gallery from './Gallery';
+import HeartGiftSection from './HeartGiftSection';
 
 const Dashboard = () => {
     const [entries, setEntries] = useState([]);
@@ -246,6 +247,7 @@ const Dashboard = () => {
 
             {/* 갤러리 섹션 */}
             <Gallery/>
+
             {/* 지도 섹션 */}
             <div className="map-section">
                 <h2>오시는 길</h2>
@@ -316,22 +318,33 @@ const Dashboard = () => {
                     </a>
                 </div>
             </div>
+            {/* 오시는 길 상세 정보 */}
+            <div className="direction-details" style={{ marginTop: '30px' }}>
+                <div style={{ marginBottom: '20px' }}>
+                    <h3 style={{ fontSize: '18px', color: '#888' }}>🚇 지하철</h3>
+                    <p>인천 1호선 갈산역 2번 출구 (부평역 환승)</p>
+                </div>
+                <div style={{ marginBottom: '20px' }}>
+                    <h3 style={{ fontSize: '18px', color: '#888' }}>🚌 버스</h3>
+                    <p><strong>일반:</strong> 90 / 간선 : 12, 30, 34, 67-1</p>
+                    <p><strong>지선:</strong> 555, 584-1, 526</p>
+                    <p><strong>시외:</strong> 1400, 3000, 5000, 9500, 3030</p>
+                </div>
+                <div>
+                    <h3 style={{ fontSize: '18px', color: '#888' }}>🚗 주차</h3>
+                    <p>하객 주차장 ▶ 부평 유림라이온스밸리 주차장 (인천시 부평구 부평대로 283)</p>
+                    <p>주차 후 웨스턴팰리스로 이동 (도보 5분 이내)</p>
+                </div>
+            </div>
 
             {/* 마음 전하기 */}
-            <div className="account-section">
+            <HeartGiftSection/>
+            {/* <div className="account-section">
                 <h2>마음 전하실 곳</h2>
                 <p><strong>신랑:</strong> 국민은행 123456-78-901234 (홍길동)</p>
                 <p><strong>신부:</strong> 신한은행 123-45-67890 (김예진)</p>
-            </div>
+            </div> */}
 
-            {/* 연락처 또는 방명록 */}
-            <div className="contact-section">
-                <h2>연락처</h2>
-                <p><strong>신랑:</strong> 010-1234-5678</p>
-                <p><strong>신부:</strong> 010-8765-4321</p>
-                {/* GuestBook 컴포넌트에 entries 데이터를 전달 */}
-                <GuestBook entries={entries} />
-            </div>
 
         </div>
     );
