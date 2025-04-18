@@ -31,7 +31,10 @@ body {
   background-color: #f2f7e4; /* 배경색 */
   /* overflow-x: hidden; */ /* 가로 스크롤 방지 */
 }
-
+/* 전체 페이지 스크롤바 숨기기 */
+body::-webkit-scrollbar {
+  display: none;
+}
 h1 {
   font-size: 3.2em;
   line-height: 1.1;

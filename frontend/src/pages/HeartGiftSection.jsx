@@ -47,7 +47,7 @@ const HeartGiftSection = () => {
       <h2 className="section-title">💌 마음 전하실 곳</h2>
 
       <div className="family-section">
-        <details open>
+        <details>
           <summary>신랑측</summary>
           <AccountCard
             title="신랑"

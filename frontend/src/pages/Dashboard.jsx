@@ -13,6 +13,44 @@ const Dashboard = () => {
     const audioRef = React.useRef(null);
     let interval;
 
+    
+   const heroRef = useRef(null);
+  const [showMainImage, setShowMainImage] = useState(true);
+  const [showMainImage01, setShowMainImage01] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const y = window.scrollY;
+    //   console.log(y);
+  
+      if (y > 0 && showMainImage) {
+        document.body.style.overflow = 'hidden';
+        setShowMainImage(false);
+        setShowMainImage01(false);
+        
+        window.scrollTo({ top: 100 });
+
+        setTimeout(() => {
+            // window.scrollTo({ top: 100 });
+            document.body.style.overflow = '';
+        }, 800);
+      } else if (y === 0 && !showMainImage) {
+        console.log(y);
+        // setShowMainImage(true);
+        // setShowMainImage01(true);
+      }
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [showMainImage]);
+
+  useEffect(() => {
+    if (!showMainImage && heroRef.current) {
+      heroRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [showMainImage]); 
+
     // 방명록 데이터를 서버에서 가져오는 함수
     useEffect(() => {
         const fetchEntries = async () => {
@@ -116,77 +154,22 @@ const Dashboard = () => {
           }
         }, []);
       
-    /* const mapContainerRef = useRef(null); // 지도를 렌더링할 DOM 참조
-    useEffect(() => {
-        if (window.kakao && window.kakao.maps) {
-            window.kakao.maps.load(() => {
-                const mapContainer = mapContainerRef.current;
-    
-                const mapOption = {
-                    center: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
-                    level: 3,
-                };
-    
-                const map = new window.kakao.maps.Map(mapContainer, mapOption);
-    
-                const markerPosition = new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179);
-                const marker = new window.kakao.maps.Marker({
-                    position: markerPosition,
-                });
-                marker.setMap(map);
-    
-                const infowindow = new window.kakao.maps.InfoWindow({
-                    content: '<div style="padding:5px;font-size:14px;">웨스턴팰리스웨딩하우스</div>',
-                });
-                infowindow.open(map, marker);
-            });
-        }
-    }, []); */
-    
-    /* 지도 */
-    /* const mapContainerRef = useRef(null); // 지도를 렌더링할 DOM 참조
-
-    useEffect(() => {
-        const mapContainer = mapContainerRef.current;
-    
-        const initializeMap = () => {
-            const mapOption = {
-                center: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
-                level: 3,
-            };
-    
-            const map = new window.kakao.maps.Map(mapContainer, mapOption);
-    
-            const marker = new window.kakao.maps.Marker({
-                position: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
-            });
-    
-            marker.setMap(map);
-        };
-    
-        const loadKakaoMap = () => {
-            if (window.kakao && window.kakao.maps) {
-                window.kakao.maps.load(() => {
-                    initializeMap();
-                });
-            }
-        };
-    
-        if (window.kakao && window.kakao.maps) {
-            loadKakaoMap();
-        } else {
-            const checkInterval = setInterval(() => {
-                if (window.kakao && window.kakao.maps) {
-                    clearInterval(checkInterval);
-                    loadKakaoMap();
-                }
-            }, 300);
-        }
-    }, []); */
-
     return (
         <div className="dashboard">
-            <div className="hero-section">
+            
+            {/* 1. 첫 화면 전용 full 이미지 섹션 */}
+            <div className={`wedding-card ${!showMainImage ? "hidden" : ""}`}>
+                <div className="intro-image-fullscreen">
+                    <img
+                    src="/images/main_img.png"
+                    alt="풀스크린 이미지"
+                    className={`intro-full-img `}
+                    />
+                    <div className="scroll-down-text">▼ 아래로 스크롤</div>
+                </div>
+            </div>
+            {/* 아래는 hero-section 등 나머지 내용 */}
+            <div className={`hero-section ${showMainImage01 ? "fixed" : ""}`} ref={heroRef}>
                 <div className="music-control">
                     <audio ref={audioRef} src="/music/music1.mp3" autoPlay loop />
                     <button onClick={toggleMusic}>
