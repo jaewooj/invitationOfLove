@@ -15,41 +15,95 @@ const Dashboard = () => {
 
     
    const heroRef = useRef(null);
-  const [showMainImage, setShowMainImage] = useState(true);
-  const [showMainImage01, setShowMainImage01] = useState(true);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-    //   console.log(y);
-  
-      if (y > 0 && showMainImage) {
-        document.body.style.overflow = 'hidden';
-        setShowMainImage(false);
-        setShowMainImage01(false);
-        
-        window.scrollTo({ top: 100 });
-
+   const [showMainImage, setShowMainImage] = useState(true);
+   const [showMainImage01, setShowMainImage01] = useState(true);
+ 
+   useEffect(() => {
+     const handleScroll = () => {
+       const y = window.scrollY;
+       console.log(y);
+   
+       if (y > 0 && showMainImage) {
+         setShowMainImage(false);
+         document.body.style.overflow = 'hidden';
+         window.scrollTo({ top: 0 });
+ 
         setTimeout(() => {
-            // window.scrollTo({ top: 100 });
+            setShowMainImage01(false);
+            window.scrollTo({ top: 0 });
             document.body.style.overflow = '';
         }, 800);
-      } else if (y === 0 && !showMainImage) {
-        console.log(y);
-        // setShowMainImage(true);
-        // setShowMainImage01(true);
-      }
-    };
-  
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [showMainImage]);
+       } 
+       /* else if (y===1000&&!showMainImage){
+            setShowMainImage(true);
+            setShowMainImage01(true);
+       } */
+       /* else if (y === 0 && !showMainImage) {
+         console.log(y);
+         // setShowMainImage(true);
+         // setShowMainImage01(true);
+       } */
+     };
+   
+     window.addEventListener("scroll", handleScroll);
+     return () => window.removeEventListener("scroll", handleScroll);
+   }, [showMainImage]);
 
   useEffect(() => {
-    if (!showMainImage && heroRef.current) {
-      heroRef.current.scrollIntoView({ behavior: "smooth" });
+  let startY = 0;
+  let isTouching = false;
+
+  // 📱 모바일 터치 이벤트
+  const handleTouchStart = (e) => {
+    startY = e.touches[0].clientY;
+    isTouching = true;
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isTouching) return;
+
+    const currentY = e.touches[0].clientY;
+    const deltaY = currentY - startY;
+
+    // 맨 위에서 아래로 끌었을 때
+    if (window.scrollY === 0 && deltaY > 30) {
+      setShowMainImage(true);
+      setShowMainImage01(true);
     }
-  }, [showMainImage]); 
+  };
+
+  const handleTouchEnd = () => {
+    isTouching = false;
+  };
+
+  // 🖱️ PC 휠 이벤트
+  const handleWheel = (e) => {
+    // scrollY가 0이고, 휠을 위로 올리는 경우(deltaY < 0)
+    if (window.scrollY === 0 && e.deltaY < -30) {
+      setShowMainImage(true);
+      setShowMainImage01(true);
+    }
+  };
+
+  window.addEventListener("touchstart", handleTouchStart);
+  window.addEventListener("touchmove", handleTouchMove);
+  window.addEventListener("touchend", handleTouchEnd);
+  window.addEventListener("wheel", handleWheel);
+
+  return () => {
+    window.removeEventListener("touchstart", handleTouchStart);
+    window.removeEventListener("touchmove", handleTouchMove);
+    window.removeEventListener("touchend", handleTouchEnd);
+    window.removeEventListener("wheel", handleWheel);
+  };
+}, []);
+   useEffect(() => {
+     if (!showMainImage && heroRef.current) {
+       heroRef.current.scrollIntoView({ behavior: "smooth" });
+     }
+   }, [showMainImage]); 
+ 
+
 
     // 방명록 데이터를 서버에서 가져오는 함수
     useEffect(() => {
@@ -177,7 +231,7 @@ const Dashboard = () => {
                     </button>
                 </div>
                 <div className="mainImg">
-                    <img src="/images/main_img.png" alt="결혼사진" className="hero-image" />
+                    <img src="/images/main_img2.jpg" alt="결혼사진" className="hero-image" />
                     {/* 꽃내리는 애니메이션 */}
                     {createFlowers()}
 

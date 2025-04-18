@@ -1,7 +1,7 @@
 
 .dashboard {
   width: 100%;
-  height: 100%;
+  height: auto;
   margin: 0 auto;
   font-family: 'Gowun Batang', 'Noto Serif KR', serif;
   background: #fff;
@@ -74,10 +74,13 @@
   opacity: 1;
   width: 100%;
   max-width: 400px;
+  height: 100vh;
   position: fixed;
+  margin-bottom: 100px;
   top: 0px;
   text-align: center;
-  overflow: hidden;
+  z-index: 10;
+  
 }
 
     .dashboard .imgContainer {
