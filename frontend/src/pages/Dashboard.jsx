@@ -39,15 +39,6 @@ const Dashboard = () => {
             document.body.style.overflow = '';
         }, 800);
        } 
-       /* else if (y===1000&&!showMainImage){
-            setShowMainImage(true);
-            setShowMainImage01(true);
-       } */
-       /* else if (y === 0 && !showMainImage) {
-         console.log(y);
-         // setShowMainImage(true);
-         // setShowMainImage01(true);
-       } */
      };
    
      window.addEventListener("scroll", handleScroll);
@@ -72,6 +63,7 @@ const Dashboard = () => {
 
     // 맨 위에서 아래로 끌었을 때
     if (window.scrollY === 0 && deltaY > 30) {
+        // console.log(window.scrollY);
       setShowMainImage(true);
       setShowMainImage01(true);
     }
@@ -102,12 +94,6 @@ const Dashboard = () => {
     window.removeEventListener("wheel", handleWheel);
   };
 }, []);
-   useEffect(() => {
-     if (!showMainImage && heroRef.current) {
-       heroRef.current.scrollIntoView({ behavior: "smooth" });
-     }
-   }, [showMainImage]); 
- 
 
 
     // 방명록 데이터를 서버에서 가져오는 함수
@@ -127,6 +113,7 @@ const Dashboard = () => {
         };
 
         fetchEntries();
+        
     }, []); // 컴포넌트가 마운트될 때 한 번만 실행
 
 
