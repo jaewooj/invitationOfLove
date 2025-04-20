@@ -1,0 +1,28 @@
+
+/* 지도 섹션 스타일 */
+.map-section {
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Gowun Batang', 'Noto Serif KR', serif;
+    padding: 40px 0px;
+  }
+  .map-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .map-section p {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  .map-section #map {
+    margin-bottom: 20px;
+  }
+  
+  .map-image {
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    min-height: 100px;
+    border-radius: 12px;
+    margin-top: 16px;
+  }

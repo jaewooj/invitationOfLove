@@ -1,0 +1,30 @@
+
+.intro-section {
+    padding: 60px 20px 40px 20px;
+    text-align: center;
+    background-color: #fffaf7;
+    color: #5c4b3b;
+    font-family: 'Gowun Batang', 'Noto Serif KR', serif;
+    font-size: 1.1rem;
+    line-height: 2;
+    letter-spacing: 0.05em;
+
+  }
+  .intro-section p {
+    margin: 12px 0;
+    font-weight: 400;
+    font-family: 'Gowun Batang', 'Noto Serif KR', serif;
+  }
+
+  .intro-section .parents-info {
+    margin-top: 40px;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #444;
+    font-weight: 500;
+  }
+  .intro-section .parents-info strong {
+    font-weight: 600;
+    color: #333;
+  }
+

@@ -3,6 +3,11 @@ import './Dashboard.css';
 import GuestBook from './GuestBook';
 import Gallery from './Gallery';
 import HeartGiftSection from './HeartGiftSection';
+import Schedule from './Schedule';
+import WeddingMap from './WeddingMap';
+import DirectionDt from './DirectionDt';
+import IntroSection from './IntroSection';
+import CountDown from './CountDown';
 
 const Dashboard = () => {
     const [entries, setEntries] = useState([]);
@@ -182,32 +187,6 @@ const Dashboard = () => {
         // iOS 등에서는 상호작용 전까지 차단될 수 있음
         tryPlayAudio();
     }, []);
-    const mapRef = useRef(null);
-
-    useEffect(() => {
-        if (window.kakao && window.kakao.maps) {
-            window.kakao.maps.load(() => {
-              const container = mapRef.current;
-              const options = {
-                center: new window.kakao.maps.LatLng(37.51583923789284, 126.72252151056179),
-                level: 3,
-              };
-      
-              const map = new window.kakao.maps.Map(container, options);
-      
-              const marker = new window.kakao.maps.Marker({
-                position: options.center,
-                map,
-              });
-      
-              const infowindow = new window.kakao.maps.InfoWindow({
-                content: '<div style="padding:5px;font-size:14px;">웨스턴팰리스웨딩하우스</div>',
-              });
-              infowindow.open(map, marker);
-            });
-          }
-        }, []);
-      
     return (
         <div className="dashboard">
             
@@ -215,7 +194,7 @@ const Dashboard = () => {
             <div className={`wedding-card ${!showMainImage ? "hidden" : ""}`}>
                 <div className="intro-image-fullscreen">
                     <img
-                    src="/images/main_img.png"
+                    src="/images/main_img2.jpg"
                     alt="풀스크린 이미지"
                     className={`intro-full-img `}
                     />
@@ -245,143 +224,20 @@ const Dashboard = () => {
             </div>
 
             {/* 소개 섹션 */}
-            <div className="intro-section">
-                <p>저희 두 사람이 사랑으로 함께 새로운 시작을 하려 합니다</p>
-                <p>소중한 걸음으로 축복해 주세요</p>
-                <p>삶의 새로운 페이지를 여는 이 자리에</p>
-                <p>소중한 분들을 초대하고 싶습니다</p>
-                <p>부부가 될 저희의 첫걸음을 축복해주세요</p>
-                
-                {/* 부모님 소개 추가 */}
-                <div className="parents-info">
-                    <p>김아빠 · 김엄마 아들 <strong>정지훈</strong></p>
-                    <p>서아빠 · 서엄마 딸 <strong>서예진</strong></p>
-                </div>
-            </div>
-
+            <IntroSection/>
             {/* 일정 섹션 */}
-            <div className="schedule-section">
-                <h2>WEDDING DAY</h2>
-                <p className="schedule-datetime">2025년 9월 13일 토요일 | 오후 12시 10분</p>
-                <p className="schedule-subtext">Saturday, September 13, 2025 | PM 12:10</p>
-                <div className="calendar">
-                    <div className="calendar-header">
-                        <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
-                    </div>
-                    <div className="calendar-days">
-                        {[
-                            '', 1, 2, 3, 4, 5, 6,
-                            7, 8, 9, 10, 11, 12,
-                            <div className="highlight-day">13</div>, 14, 15, 16, 17, 18, 19,
-                            20, 21, 22, 23, 24, 25, 26,
-                            27, 28, 29, 30
-                        ].map((day, i) => (
-                            <div key={i} className="calendar-cell">{day}</div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
+            <Schedule/>
+            {/* 카운트다운 섹션 */}
+            <CountDown/>
             {/* 갤러리 섹션 */}
             <Gallery/>
 
             {/* 지도 섹션 */}
-            <div className="map-section">
-                <h2>오시는 길</h2>
-                <p><strong>주소:</strong> 인천 부평구 부평대로 283 웨스턴팰리스웨딩하우스</p>
-                <div
-                    id="map"
-                    // ref={mapContainerRef}
-                    ref={mapRef}
-                    style={{ width: '100%', height: '300px', borderRadius: '12px', marginTop: '10px' }}
-                ></div>
-                <p>
-                    지도를 자세히 보려면{" "}
-                    <a
-                        href="https://map.kakao.com/?q=웨스턴팰리스웨딩하우스"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        여기를 눌러주세요
-                    </a>
-                </p>
-                <div style={{ marginTop: '16px', display: 'flex', justifyContent:'center', gap: '10px' }}>
-                    <a
-                        href={`https://map.kakao.com/link/to/웨스턴팰리스웨딩하우스,37.51583923789284, 126.72252151056179`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                            backgroundColor: '#fee500',
-                            padding: '8px 12px',
-                            borderRadius: '8px',
-                            color: '#000',
-                            fontWeight: 'bold',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        🟡 카카오내비
-                    </a>
-
-                    <a
-                        href={`tmap://route?goalname=웨스턴팰리스웨딩하우스&goalx=126.72252151056179&goaly=37.51583923789284&reqCoordType=WGS84GEO&resCoordType=WGS84GEO`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                            backgroundColor: '#03c75a',
-                            padding: '8px 12px',
-                            borderRadius: '8px',
-                            color: '#fff',
-                            fontWeight: 'bold',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        💚 티맵
-                    </a>
-
-                    <a
-                        href={`nmap://route/car?dlat=37.51583923789284&dlng=126.72252151056179&dname=웨스턴팰리스웨딩하우스&appname=com.example.myapp`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                            backgroundColor: '#00c73c',
-                            padding: '8px 12px',
-                            borderRadius: '8px',
-                            color: '#fff',
-                            fontWeight: 'bold',
-                            textDecoration: 'none',
-                        }}
-                    >
-                        📗 네이버지도
-                    </a>
-                </div>
-            </div>
+            <WeddingMap/>
             {/* 오시는 길 상세 정보 */}
-            <div className="direction-details" style={{ marginTop: '30px' }}>
-                <div style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '18px', color: '#888' }}>🚇 지하철</h3>
-                    <p>인천 1호선 갈산역 2번 출구 (부평역 환승)</p>
-                </div>
-                <div style={{ marginBottom: '20px' }}>
-                    <h3 style={{ fontSize: '18px', color: '#888' }}>🚌 버스</h3>
-                    <p><strong>일반:</strong> 90 / 간선 : 12, 30, 34, 67-1</p>
-                    <p><strong>지선:</strong> 555, 584-1, 526</p>
-                    <p><strong>시외:</strong> 1400, 3000, 5000, 9500, 3030</p>
-                </div>
-                <div>
-                    <h3 style={{ fontSize: '18px', color: '#888' }}>🚗 주차</h3>
-                    <p>하객 주차장 ▶ 부평 유림라이온스밸리 주차장 (인천시 부평구 부평대로 283)</p>
-                    <p>주차 후 웨스턴팰리스로 이동 (도보 5분 이내)</p>
-                </div>
-            </div>
-
+            <DirectionDt/>
             {/* 마음 전하기 */}
             <HeartGiftSection/>
-            {/* <div className="account-section">
-                <h2>마음 전하실 곳</h2>
-                <p><strong>신랑:</strong> 국민은행 123456-78-901234 (홍길동)</p>
-                <p><strong>신부:</strong> 신한은행 123-45-67890 (김예진)</p>
-            </div> */}
-
 
         </div>
     );
