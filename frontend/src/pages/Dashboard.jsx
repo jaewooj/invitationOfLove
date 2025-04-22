@@ -185,6 +185,19 @@ const Dashboard = () => {
                     alt="풀스크린 이미지"
                     className={`intro-full-img `}
                     />
+                    <div className="overlay-text">
+                        <p className="small-names slide-in">LEE JIMIN & KIM SUHO</p>
+                        <h1 className="main-title slide-in" style={{ animationDelay: '0.2s' }}>
+                            Together <span>and</span> Forever
+                        </h1>
+                        <p className="wedding-date slide-in" style={{ animationDelay: '0.4s' }}>
+                            MAY 24, 25
+                        </p>
+                        <p className="quote fade-in-up" style={{ animationDelay: '1.2s' }}>
+                            In the garden of life, your love is the <br />
+                            most beautiful bloom, vibrant and everlastingly fragrant.
+                        </p>
+                    </div>
                     <div className="scroll-down-text">▼ 아래로 스크롤</div>
                 </div>
             </div>
