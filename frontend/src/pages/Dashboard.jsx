@@ -239,37 +239,37 @@ const Dashboard = () => {
             </div>
 
             {/* 소개 섹션 */}
-            <div ref={introRef} className={`fade-in-up ${introVisible ? 'visible' : ''}`}>
+            <div ref={introRef} className={`fade-in-up1 ${introVisible ? 'visible' : ''}`}>
                 <IntroSection />
             </div>
             {/* 일정 섹션 */}
-            <div ref={scheduleRef} className={`fade-in-up ${scheduleVisible ? 'visible' : ''}`}>
+            <div ref={scheduleRef} className={`fade-in-up1 ${scheduleVisible ? 'visible' : ''}`}>
                 <Schedule />
             </div>
             {/* 카운트다운 섹션 */}
-            <div ref={countDownRef} className={`fade-in-up ${countDownVisible ? 'visible' : ''}`}>
+            <div ref={countDownRef} className={`fade-in-up1 ${countDownVisible ? 'visible' : ''}`}>
                 <CountDown />
             </div>
             {/* 갤러리 섹션 */}
-            <div ref={galleryRef} className={`fade-in-up ${galleryVisible ? 'visible' : ''}`}>
+            <div ref={galleryRef} className={`fade-in-up1 ${galleryVisible ? 'visible' : ''}`}>
                 <Gallery />
             </div>
 
             {/* 지도 섹션 */}
-            <div ref={mapRef} className={`fade-in-up ${mapVisible ? 'visible' : ''}`}>
+            <div ref={mapRef} className={`fade-in-up1 ${mapVisible ? 'visible' : ''}`}>
                 <WeddingMap />
             </div>
             {/* 오시는 길 상세 정보 */}
-            <div ref={directionRef} className={`fade-in-up ${directionVisible ? 'visible' : ''}`}>
+            <div ref={directionRef} className={`fade-in-up1 ${directionVisible ? 'visible' : ''}`}>
                 <DirectionDt />
             </div>
 
             {/* 마음 전하기 */}
-            <div ref={giftRef} className={`fade-in-up ${giftVisible ? 'visible' : ''}`}>
+            <div ref={giftRef} className={`fade-in-up1 ${giftVisible ? 'visible' : ''}`}>
                 <HeartGiftSection />
             </div>
             {/* 푸터 */}
-            <div ref={footerRef} className={`fade-in-up ${footerVisible ? 'visible' : ''}`}>
+            <div ref={footerRef} className={`fade-in-up1 ${footerVisible ? 'visible' : ''}`}>
                 <Footer/>
             </div>
 
