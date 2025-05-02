@@ -7,9 +7,24 @@ import Schedule from './Schedule';
 import WeddingMap from './WeddingMap';
 import DirectionDt from './DirectionDt';
 import IntroSection from './IntroSection';
-import CountDown from './CountDown';
+import CountDown from './CountDown';// Dashboard.js 내부에서
+import UseInView from './UseInView';
+import Footer from '../components/Footer';
 
 const Dashboard = () => {
+
+  // 각각 섹션에 대한 감지 훅 생성
+  const [introRef, introVisible] = UseInView({ threshold: 0.2 });
+  const [scheduleRef, scheduleVisible] = UseInView({ threshold: 0.2 });
+  const [countDownRef, countDownVisible] = UseInView({ threshold: 0.2 });
+  const [galleryRef, galleryVisible] = UseInView({ threshold: 0.2 });
+  const [mapRef, mapVisible] = UseInView({ threshold: 0.2 });
+  const [directionRef, directionVisible] = UseInView({ threshold: 0.2 });
+  const [giftRef, giftVisible] = UseInView({ threshold: 0.2 });
+  const [footerRef, footerVisible] = UseInView({ threshold: 0.2 });
+
+
+
     const [entries, setEntries] = useState([]);
     const [name, setName] = useState('');
     const [message, setMessage] = useState('');
@@ -185,6 +200,19 @@ const Dashboard = () => {
                     alt="풀스크린 이미지"
                     className={`intro-full-img `}
                     />
+                    <div className="overlay-text">
+                        <p className="small-names slide-in">LEE JIMIN & KIM SUHO</p>
+                        <h1 className="main-title slide-in" style={{ animationDelay: '0.2s' }}>
+                            Together <span>and</span> Forever
+                        </h1>
+                        <p className="wedding-date slide-in" style={{ animationDelay: '0.4s' }}>
+                            MAY 24, 25
+                        </p>
+                        <p className="quote fade-in-up" style={{ animationDelay: '1.2s' }}>
+                            In the garden of life, your love is the <br />
+                            most beautiful bloom, vibrant and everlastingly fragrant.
+                        </p>
+                    </div>
                     <div className="scroll-down-text">▼ 아래로 스크롤</div>
                 </div>
             </div>
@@ -211,20 +239,39 @@ const Dashboard = () => {
             </div>
 
             {/* 소개 섹션 */}
-            <IntroSection/>
+            <div ref={introRef} className={`fade-in-up ${introVisible ? 'visible' : ''}`}>
+                <IntroSection />
+            </div>
             {/* 일정 섹션 */}
-            <Schedule/>
+            <div ref={scheduleRef} className={`fade-in-up ${scheduleVisible ? 'visible' : ''}`}>
+                <Schedule />
+            </div>
             {/* 카운트다운 섹션 */}
-            <CountDown/>
+            <div ref={countDownRef} className={`fade-in-up ${countDownVisible ? 'visible' : ''}`}>
+                <CountDown />
+            </div>
             {/* 갤러리 섹션 */}
-            <Gallery/>
+            <div ref={galleryRef} className={`fade-in-up ${galleryVisible ? 'visible' : ''}`}>
+                <Gallery />
+            </div>
 
             {/* 지도 섹션 */}
-            <WeddingMap/>
+            <div ref={mapRef} className={`fade-in-up ${mapVisible ? 'visible' : ''}`}>
+                <WeddingMap />
+            </div>
             {/* 오시는 길 상세 정보 */}
-            <DirectionDt/>
+            <div ref={directionRef} className={`fade-in-up ${directionVisible ? 'visible' : ''}`}>
+                <DirectionDt />
+            </div>
+
             {/* 마음 전하기 */}
-            <HeartGiftSection/>
+            <div ref={giftRef} className={`fade-in-up ${giftVisible ? 'visible' : ''}`}>
+                <HeartGiftSection />
+            </div>
+            {/* 푸터 */}
+            <div ref={footerRef} className={`fade-in-up ${footerVisible ? 'visible' : ''}`}>
+                <Footer/>
+            </div>
 
         </div>
     );

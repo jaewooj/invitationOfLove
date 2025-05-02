@@ -13,3 +13,14 @@
     font-weight: 600;
     color: #555;
   }
+  /* Dashboard.css 혹은 별도 애니메이션 CSS에 추가 */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
